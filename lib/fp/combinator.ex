@@ -28,7 +28,8 @@ defmodule Fp.Combinator do
   iex> inspect_after_plus1 <<< 123
   "124"
   """
-  @spec compose((b -> c), (a -> b)) :: (a -> c) when a: term, b: term, c: term
+  @spec compose((b -> c), (a -> b)) :: (a -> c)
+        when a: term, b: term, c: term
   def compose(g, h), do: fn x -> g <<< (h <<< x) end
 
   @doc """
@@ -41,6 +42,7 @@ defmodule Fp.Combinator do
   iex> show_total <<< 123
   "total: 124"
   """
-  @spec (b -> c) <|> (a -> b) :: (a -> c) when a: term, b: term, c: term
+  @spec (b -> c) <|> (a -> b) :: (a -> c)
+        when a: term, b: term, c: term
   def g <|> h, do: (&compose/2) <<< g <<< h
 end
